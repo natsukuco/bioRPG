@@ -649,6 +649,11 @@ h1 {
     transition: all 0.2s ease;
 }
 
+.label-target {
+    width: 24px;
+    height: 24px;
+}
+
 .label-target.filled {
     border-style: solid;
     background: rgba(139, 105, 20, 0.2);
