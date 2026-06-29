@@ -65,6 +65,10 @@ const Game = (() => {
         document.getElementById('btn-journal-story').addEventListener('click', () => showJournal('story-screen'));
         document.getElementById('btn-journal-puzzle').addEventListener('click', () => showJournal('puzzle-screen'));
         document.getElementById('btn-journal-close').addEventListener('click', closeJournal);
+        document.getElementById('btn-starchart').addEventListener('click', showConstellation);
+        document.getElementById('btn-constellation-close').addEventListener('click', showMap);
+        document.getElementById('btn-journal-prev').addEventListener('click', () => turnJournalPage(-1));
+        document.getElementById('btn-journal-next').addEventListener('click', () => turnJournalPage(1));
         document.getElementById('btn-story-next').addEventListener('click', advanceStory);
         document.getElementById('btn-check-answer').addEventListener('click', checkAnswer);
         document.getElementById('btn-puzzle-next').addEventListener('click', advancePuzzle);
@@ -146,6 +150,67 @@ const Game = (() => {
 
     function getStarString(count) {
         return '★'.repeat(count) + '☆'.repeat(3 - count);
+    }
+
+    // Fixed constellation coordinates (percent of the chart box) for the 7 chapters
+    const STAR_COORDS = [
+        { x: 14, y: 70 },
+        { x: 27, y: 38 },
+        { x: 40, y: 62 },
+        { x: 52, y: 28 },
+        { x: 64, y: 58 },
+        { x: 78, y: 32 },
+        { x: 88, y: 66 }
+    ];
+
+    function showConstellation() {
+        updatePlayerInfo();
+        renderConstellation();
+        switchScreen('constellation-screen');
+    }
+
+    function renderConstellation() {
+        const chart = document.getElementById('star-chart');
+        const nextChapter = getNextChapter();
+
+        const lines = [];
+        for (let i = 0; i < chapters.length - 1; i++) {
+            const a = STAR_COORDS[i];
+            const b = STAR_COORDS[i + 1];
+            const lit = state.chaptersCompleted.includes(i) && state.chaptersCompleted.includes(i + 1);
+            lines.push(`<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}"
+                stroke="${lit ? '#e3c266' : '#5a4a32'}" stroke-width="${lit ? 0.6 : 0.4}"
+                stroke-dasharray="${lit ? '' : '1.5,1.5'}" opacity="${lit ? 0.9 : 0.45}"
+                vector-effect="non-scaling-stroke"/>`);
+        }
+
+        const svg = `<svg viewBox="0 0 100 100" preserveAspectRatio="none" class="constellation-lines">
+            ${lines.join('')}
+        </svg>`;
+
+        const nodes = chapters.map((chapter, index) => {
+            const isCompleted = state.chaptersCompleted.includes(index);
+            const isCurrent = index === nextChapter;
+            const isLocked = index > nextChapter;
+            const coord = STAR_COORDS[index];
+            const stars = state.chapterStars[index] || 0;
+            const cls = `star-node ${isCompleted ? 'completed' : ''} ${isCurrent ? 'current' : ''} ${isLocked ? 'locked' : ''}`;
+            const rating = isCompleted ? `<span class="star-rating">${getStarString(stars)}</span>` : '';
+            return `<div class="${cls}" data-index="${index}" style="left:${coord.x}%;top:${coord.y}%;">
+                <span class="star-glyph">&#10022;</span>
+                <span class="star-label">${index + 1}. ${chapter.title}</span>
+                ${rating}
+            </div>`;
+        }).join('');
+
+        chart.innerHTML = svg + nodes;
+
+        chart.querySelectorAll('.star-node').forEach(node => {
+            const index = parseInt(node.dataset.index);
+            if (!node.classList.contains('locked')) {
+                node.addEventListener('click', () => startChapter(index));
+            }
+        });
     }
 
     const LORE_TIPS = [
@@ -402,6 +467,7 @@ const Game = (() => {
 
     function showJournal(fromScreen) {
         state.previousScreen = fromScreen;
+        state.journalPage = 0;
         renderJournal();
         switchScreen('journal-screen');
     }
@@ -410,24 +476,78 @@ const Game = (() => {
         switchScreen(state.previousScreen || 'map-screen');
     }
 
-    function renderJournal() {
-        const content = document.getElementById('journal-content');
-        const entries = state.journalEntries;
+    // Each "leaf" is a single page of the open tome. Pages are shown two at a time.
+    function buildJournalLeaves() {
+        const leaves = [];
+        const indices = Object.keys(state.journalEntries)
+            .map(Number)
+            .sort((a, b) => a - b);
 
-        if (Object.keys(entries).length === 0) {
-            content.innerHTML = '<div class="journal-empty">Your field journal is empty. Complete chapters to add discoveries!</div>';
+        indices.forEach(index => {
+            const chapter = chapters[index];
+            const facts = state.journalEntries[index];
+            leaves.push(`
+                <div class="tome-chapter-title">Chapter ${index + 1}</div>
+                <h3 class="tome-heading">${chapter.title}</h3>
+                <ul class="tome-list">${facts.map(f => `<li>${f}</li>`).join('')}</ul>
+            `);
+        });
+        return leaves;
+    }
+
+    function renderJournal() {
+        const tome = document.getElementById('tome');
+        const nav = document.querySelector('.tome-nav');
+        const leftEl = document.getElementById('tome-page-left');
+        const rightEl = document.getElementById('tome-page-right');
+        const indicator = document.getElementById('journal-page-indicator');
+
+        const leaves = buildJournalLeaves();
+
+        if (leaves.length === 0) {
+            tome.style.display = 'none';
+            nav.style.display = 'none';
+            let empty = document.getElementById('journal-empty');
+            if (!empty) {
+                empty = document.createElement('div');
+                empty.id = 'journal-empty';
+                empty.className = 'journal-empty';
+                document.getElementById('journal-content').appendChild(empty);
+            }
+            empty.style.display = 'block';
+            empty.textContent = 'The pages are yet blank. Complete a chapter, and your discoveries shall be inscribed here.';
             return;
         }
 
-        let html = '';
-        for (const [index, facts] of Object.entries(entries)) {
-            const chapter = chapters[parseInt(index)];
-            html += `<div class="journal-chapter">
-                <h3>${chapter.title}</h3>
-                <ul>${facts.map(f => `<li>${f}</li>`).join('')}</ul>
-            </div>`;
-        }
-        content.innerHTML = html;
+        const emptyEl = document.getElementById('journal-empty');
+        if (emptyEl) emptyEl.style.display = 'none';
+        tome.style.display = '';
+        nav.style.display = '';
+
+        const totalSpreads = Math.ceil(leaves.length / 2);
+        if (state.journalPage == null) state.journalPage = 0;
+        state.journalPage = Math.max(0, Math.min(state.journalPage, totalSpreads - 1));
+
+        const leftIdx = state.journalPage * 2;
+        const rightIdx = leftIdx + 1;
+
+        leftEl.innerHTML = leaves[leftIdx] || '';
+        rightEl.innerHTML = leaves[rightIdx] || '<div class="tome-blank">&#10070;</div>';
+
+        // page-turn animation
+        tome.classList.remove('turning');
+        void tome.offsetWidth;
+        tome.classList.add('turning');
+
+        indicator.textContent = `Page ${state.journalPage + 1} of ${totalSpreads}`;
+        document.getElementById('btn-journal-prev').disabled = state.journalPage === 0;
+        document.getElementById('btn-journal-next').disabled = state.journalPage >= totalSpreads - 1;
+    }
+
+    function turnJournalPage(dir) {
+        if (state.journalPage == null) state.journalPage = 0;
+        state.journalPage += dir;
+        renderJournal();
     }
 
     function switchScreen(screenId) {
