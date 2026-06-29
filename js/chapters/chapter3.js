@@ -1,18 +1,23 @@
 Game.registerChapter({
     title: 'Biological Molecules',
     location: 'Coast of Brazil — Rainforest Specimens',
+    lore: [
+        'The jungle teems with a thousand shapes of life — yet beneath them all lie but a few hidden substances, repeated without end.',
+        'They say every leaf and beast is but a vessel for three great matters: that which fuels, that which builds, and that which stores.',
+        'A drop of reagent, a change of hue — and the secret stuff of life betrays itself to the patient eye.'
+    ],
     story: [
         {
             speaker: 'Charles Darwin',
-            text: 'The Brazilian rainforest is extraordinary! Such diversity of life — from towering trees to tiny insects. But what are all these living things made of at the chemical level?'
+            text: 'Behold this Brazilian wilderness — it staggers the mind! Life heaped upon life, from the cathedral trees to the least gnat. And yet a darker question gnaws at me: strip away the colour and the form, and of what base matter is all this teeming creation truly made?'
         },
         {
             speaker: 'Charles Darwin',
-            text: 'I need you to help me classify the molecules in our specimens. There are three main types we must identify: carbohydrates for energy, proteins for growth and repair, and fats for energy storage. Each can be detected with a specific chemical test.'
+            text: 'Aid me in sorting the substances hidden within these specimens. Three great matters we must hunt: the carbohydrates that lend fire to the body, the proteins that raise and mend its flesh, and the fats that hoard energy against lean days. Each leaves its own telltale mark, if you know which reagent to wield.'
         },
         {
             speaker: '',
-            text: 'You set up a makeshift laboratory on deck. Bottles of iodine solution, Benedict\'s reagent, biuret reagent, and ethanol line the shelf. Each specimen must be tested methodically — a true scientific approach.'
+            text: 'Upon the swaying deck you build a crude laboratory. Iodine, Benedict\'s reagent, biuret, and ethanol stand in their glass bottles like a row of waiting oracles. One by one the specimens must be questioned — methodically, mercilessly — until each surrenders its nature.'
         }
     ],
     puzzles: [
@@ -49,7 +54,7 @@ Game.registerChapter({
             explanation: 'Iodine test: starch → brown/yellow to blue-black. Benedict\'s test: reducing sugar → blue to brick-red (when heated). Biuret test: protein → blue to purple/violet. Ethanol emulsion test: fats → clear to cloudy white.',
             storyBefore: {
                 speaker: '',
-                text: 'You prepare four test tubes, each containing a different specimen dissolved in water. Time to apply the reagents and observe the colour changes carefully...'
+                text: 'Four glass tubes stand before you, each cradling a different specimen dissolved in water. With a steady hand you ready the reagents — and lean close to watch what colours the hidden substances will confess...'
             },
             leftTitle: 'Food Test',
             rightTitle: 'Positive Result',
@@ -75,7 +80,7 @@ Game.registerChapter({
             explanation: 'Starch is a polymer made of many glucose monomers joined together. Similarly, proteins are polymers of amino acid monomers, and fats are made of glycerol and fatty acids.',
             storyBefore: {
                 speaker: 'Charles Darwin',
-                text: 'I have been thinking about how these large molecules are constructed. It seems that complex molecules are built from simpler, repeating units — like bricks forming a wall. What fundamental unit builds up starch?'
+                text: 'A thought has haunted me through the small hours. These great molecules — they are not whole and indivisible, but built, like a cathedral wall, from one humble brick set down again and again. Tell me, then: what single, simple unit is laid in courses to raise up starch?'
             },
             options: [
                 'Glucose — a simple sugar that links together to form starch',

@@ -1,18 +1,23 @@
 Game.registerChapter({
     title: 'Nutrition in Humans',
     location: 'Patagonia — Combating Scurvy',
+    lore: [
+        'On the bleak Patagonian shore, an old enemy stalks the crew — a sickness no cannon can repel.',
+        'The body is a furnace and a forge both, rendering humble bread into the very stuff of life.',
+        'What a man eats, and what his flesh can wring from it, may be the slender thread between life and the grave.'
+    ],
     story: [
         {
             speaker: 'Ship\'s Surgeon',
-            text: 'Captain! Three more men have fallen ill with scurvy — bleeding gums, loose teeth, terrible fatigue. We must understand how the body processes food, or we shall lose the entire crew!'
+            text: 'Captain — God help us — three more men are taken with the scurvy! Gums weeping blood, teeth loose in their heads, the strength run clean out of their limbs. Unless we fathom how the body wrings sustenance from food, this whole crew shall rot upon the deck before we sight home.'
         },
         {
             speaker: 'Charles Darwin',
-            text: 'This is a matter of nutrition. The body has an entire system for breaking food into molecules small enough to absorb into the blood. Let us trace the journey of food through the alimentary canal.'
+            text: 'Then it is a question of nutrition, and we shall meet it as men of reason. The body keeps a great engine for rending food into morsels small enough to pass into the blood itself. Come — let us follow a single mouthful on its long and perilous passage through the alimentary canal.'
         },
         {
             speaker: '',
-            text: 'You volunteer to study the problem. Starting from the mouth, you must map out every organ involved in digestion — how food is broken down mechanically (by teeth and churning) and chemically (by enzymes), until nutrients can finally be absorbed into the bloodstream.'
+            text: 'You step forward to take the task upon yourself. From the mouth onward you must chart every organ in that dark inner voyage — how food is first crushed by tooth and churning gut, then unmade by the body\'s own enzymes, until at last its nourishment may seep into the waiting blood.'
         }
     ],
     puzzles: [
@@ -58,7 +63,7 @@ Game.registerChapter({
             explanation: 'Amylase (mouth & small intestine) breaks starch → maltose. Protease/pepsin (stomach) breaks proteins → amino acids. Lipase (small intestine) breaks fats → glycerol + fatty acids. Bile (from liver) emulsifies fats into smaller droplets.',
             storyBefore: {
                 speaker: 'Charles Darwin',
-                text: 'Each region of the gut produces specific enzymes. The mouth has amylase for starch, the stomach has pepsin for proteins, and the small intestine has lipase for fats. Let us match them correctly!'
+                text: 'Each chamber of the gut keeps its own appointed artisan. In the mouth, amylase falls upon starch; in the stomach, pepsin tears at proteins; in the small intestine, lipase renders the fats. Set each worker to its rightful labour, and the whole dark engine reveals its design.'
             },
             leftTitle: 'Enzyme',
             rightTitle: 'What it does',
@@ -84,7 +89,7 @@ Game.registerChapter({
             explanation: 'Bread (starch) is chewed in the mouth where amylase begins chemical digestion. It passes through the oesophagus to the stomach (no starch digestion here). In the small intestine, pancreatic amylase completes starch → glucose conversion, which is then absorbed through villi into the blood.',
             storyBefore: {
                 speaker: '',
-                text: 'The ship\'s cook has prepared hardtack biscuits — mostly starch. You decide to trace exactly what happens to a piece from the moment it enters the mouth until its nutrients reach the blood...'
+                text: 'The cook sets down a plate of hardtack — those grim, iron biscuits that are little more than starch and stubbornness. You take up a single piece and resolve to follow its fate, step by step, from the first bite to the moment its nourishment slips at last into the blood...'
             },
             items: [
                 'Mouth: teeth break bread into smaller pieces; amylase begins digesting starch to maltose',
@@ -118,7 +123,7 @@ Game.registerChapter({
             explanation: 'Scurvy is caused by vitamin C deficiency. Fresh citrus fruits (lemons, limes, oranges) are rich in vitamin C. This is why British sailors were later called "limeys" — they carried limes to prevent scurvy!',
             storyBefore: {
                 speaker: 'Captain FitzRoy',
-                text: 'We have mapped the digestive system and understand how nutrients are absorbed. But what specific food should I procure at the next port to cure the crew\'s scurvy? Their lives depend on your knowledge!'
+                text: 'We have charted the whole dark passage of digestion and learned how the body claims its nourishment. But I am a captain, not a physician — tell me plainly: what victuals must I seize at the next port to break this scurvy and spare my men? Their very lives hang upon your answer!'
             },
             options: [
                 'Stock up on fresh citrus fruits — lemons and limes are rich in vitamin C',

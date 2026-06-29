@@ -1,18 +1,23 @@
 Game.registerChapter({
     title: 'Enzymes',
     location: 'Galapagos Islands — Iguana Digestion Studies',
+    lore: [
+        'On these black volcanic isles, life has bent itself into shapes no English field could conjure.',
+        'Within every living gut toil unseen workers — tireless, particular, and easily broken by heat or acid.',
+        'A key fits but one lock. So too, they say, does each living catalyst answer to but one master.'
+    ],
     story: [
         {
             speaker: 'Charles Darwin',
-            text: 'These marine iguanas are remarkable! They dive into the cold sea to eat tough algae from the rocks. But how do they break down such resistant material? The answer must lie in their digestive enzymes.'
+            text: 'These marine iguanas confound me utterly! They plunge into the cold and hostile sea to tear tough algae from the rocks — fare that would defeat any English stomach. How does the beast rend such stubborn matter into sustenance? The answer, I wager, lies in the hidden agents of their digestion: their enzymes.'
         },
         {
             speaker: 'Charles Darwin',
-            text: 'Enzymes are biological catalysts — they speed up chemical reactions in living things without being used up themselves. Each enzyme has a specific shape that only fits one type of substrate, like a lock and key.'
+            text: 'Enzymes are the unseen artisans of the living body — catalysts that hasten its chemistry yet are never themselves consumed in the labour. And each is fashioned to a single, exacting shape, admitting but one kind of substrate, as a lock yields only to its one true key.'
         },
         {
             speaker: '',
-            text: 'You set up experiments on the volcanic shore, testing how different conditions affect enzyme activity. The tropical heat gives you an idea — what happens when enzymes get too hot?'
+            text: 'Upon the scorched volcanic shore you arrange your apparatus, resolved to learn what bends these tiny workers to their task — and what breaks them. The merciless tropic sun beats upon your neck, and with it comes an unsettling question: what becomes of an enzyme when the heat grows too fierce to bear?'
         }
     ],
     puzzles: [
@@ -54,7 +59,7 @@ Game.registerChapter({
             explanation: 'A valid experiment tests one variable (temperature) while keeping all others constant (same enzyme concentration, same substrate, same pH, same time). Testing at multiple temperatures reveals the optimum.',
             storyBefore: {
                 speaker: 'Charles Darwin',
-                text: 'Let us design a proper experiment! We must test how temperature affects enzyme activity. Remember — a good scientist changes only one variable at a time and keeps all others constant.'
+                text: 'Now we must contrive a worthy trial. We shall learn how heat governs the labour of these enzymes — but heed the first law of the careful seeker: alter but a single thing at a time, and hold all else unmoving, lest the truth slip through your fingers unseen.'
             },
             options: [
                 'Test the enzyme at 20°C, 30°C, 37°C, 40°C, and 60°C — keeping pH, enzyme amount, and substrate the same each time',
@@ -73,7 +78,7 @@ Game.registerChapter({
             explanation: 'At high temperatures, the enzyme\'s 3D shape is destroyed (denatured). The active site changes shape, so the substrate can no longer fit — like a melted lock that no key can open. This is irreversible.',
             storyBefore: {
                 speaker: '',
-                text: 'Your results are clear: enzyme activity increases with temperature up to about 37°C, then suddenly drops. At 60°C, there is no activity at all. Something has gone permanently wrong with the enzyme...'
+                text: 'The figures spell out a chilling tale. As the heat climbs, the enzymes toil ever faster — to a peak near 37 degrees — and then, without warning, they falter and fail. By 60 degrees the labour has ceased entirely, and no cooling brings it back. Something in them has been broken beyond all mending...'
             },
             options: [
                 'The enzyme is denatured — its active site shape is permanently destroyed by heat',
@@ -108,7 +113,7 @@ Game.registerChapter({
             explanation: 'Enzymes are protein catalysts with specific active sites. They work best at an optimum temperature and pH. Beyond the optimum, they denature (active site shape destroyed permanently).',
             storyBefore: {
                 speaker: 'Charles Darwin',
-                text: 'Wonderful discoveries today! Record your findings carefully in the journal. Future scientists will want to know about the properties of these remarkable biological catalysts.'
+                text: 'A momentous day\'s work! Set it down faithfully in the journal, every particular of it. Those who come after us — in years we shall never see — will hunger to know the nature of these remarkable living catalysts.'
             },
             text: 'Enzymes are biological {0} — they speed up reactions without being used up. They are made of {1}. Each enzyme has a specifically shaped {2} where only one type of substrate can fit. This is called the {3} model. Enzymes work best at an optimum {4} (about 37°C in humans). Above this, the enzyme is {5} — its shape is permanently destroyed.',
             blanks: [

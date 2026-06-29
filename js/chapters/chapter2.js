@@ -1,18 +1,23 @@
 Game.registerChapter({
     title: 'Movement of Substances',
     location: 'The Atlantic Ocean — River Mouth Observations',
+    lore: [
+        'Out here, the river and the sea do silent battle — and water itself takes sides, drawn by laws unseen.',
+        'The crew sickens for want of sweet water, while the ocean mocks them with its bitter abundance.',
+        'A wilted flower, set in a cup, rises again as if by witchcraft. Yet it is no magic — only the quiet creep of water.'
+    ],
     story: [
         {
             speaker: 'Captain FitzRoy',
-            text: 'We are approaching the mouth of a great river. Notice how the freshwater mixes with saltwater here. The ship\'s surgeon reports our drinking water barrels are contaminated with salt.'
+            text: 'We come upon the mouth of a great river, where sweet water and brine wage their endless, silent war. Mark it well — for the surgeon brings grim news: the salt has crept into our water casks, and a thirsty crew is a mutinous one.'
         },
         {
             speaker: 'Charles Darwin',
-            text: 'Fascinating! This presents a scientific puzzle. How does water move between solutions of different concentrations? If we understand this, we might devise a method to purify our water supply.'
+            text: 'And yet — what a riddle the sea has handed us! How does water pass between waters of unlike strength, unbidden, as though it possessed a will? Unravel this law, and we may yet wring sweet water from the cursed casks and save every soul aboard.'
         },
         {
             speaker: '',
-            text: 'You observe a peculiar experiment: when you place a wilted flower in fresh water, it becomes turgid again. Water seems to move on its own, from where there is more of it to where there is less. Darwin calls this "osmosis" — but there are other ways substances move too...'
+            text: 'You try a small, uncanny experiment. A wilted bloom, drooping and spent, you set into fresh water — and within the hour it stands proud and swollen again, as if life had been poured back into it. The water moved of its own accord, from plenty toward want. Darwin names it "osmosis." But it is only one of the hidden ways that substance steals across a boundary...'
         }
     ],
     puzzles: [
@@ -40,7 +45,7 @@ Game.registerChapter({
             explanation: 'In osmosis, water moves from a region of higher water potential (dilute solution) to a region of lower water potential (concentrated solution) through a partially permeable membrane.',
             storyBefore: {
                 speaker: 'Charles Darwin',
-                text: 'Let us conduct an experiment! I have placed a membrane between two solutions — one dilute, one concentrated. Watch carefully where the water moves. This "partially permeable membrane" only allows certain molecules through.'
+                text: 'Come, let us put the riddle to the test. Between two solutions — one weak, one strong — I have stretched a thin membrane, a gatekeeper that suffers only certain travellers to pass. Watch now, and tell me which way the water chooses to flow. This "partially permeable membrane" guards its threshold jealously.'
             },
             height: 350,
             nodes: [
@@ -61,7 +66,7 @@ Game.registerChapter({
             explanation: 'When placed in a concentrated solution, water leaves the plant cell by osmosis. The vacuole shrinks, the cell becomes flaccid, and eventually the membrane pulls away from the cell wall (plasmolysis).',
             storyBefore: {
                 speaker: '',
-                text: 'You place a piece of plant tissue in concentrated salt water and observe it under the microscope over several minutes. The cells begin to change dramatically...'
+                text: 'You lay a fragment of plant tissue into strong brine and bend once more to the eyepiece. For long minutes nothing stirs — then, slowly, the cells begin to wither and recoil before your eyes, as though something vital were being drawn out of them...'
             },
             items: [
                 'Cell is turgid — vacuole is full, membrane pushes against cell wall',

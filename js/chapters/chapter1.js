@@ -1,18 +1,23 @@
 Game.registerChapter({
     title: 'Cell Structure and Organisation',
     location: 'Plymouth, England — The Ship\'s Laboratory',
+    lore: [
+        'They say all flesh, leaf and bone is built of chambers too small to see. Tonight, you shall look upon them.',
+        'The microscope was Hooke\'s own. Through its glass, the unseen architecture of life awaits a witness.',
+        'Before the Beagle braves the deep, you must first descend into a smaller, stranger world.'
+    ],
     story: [
         {
             speaker: 'Professor Henslow',
-            text: 'Welcome aboard, young naturalist! Before HMS Beagle sets sail, you must prove your worth in the laboratory. Take this microscope — it belonged to Robert Hooke himself.'
+            text: 'So. You are the one who would sail into the unknown. Before HMS Beagle carries you beyond the maps, you must prove your eye in this dim laboratory. Take this microscope — it belonged to Robert Hooke himself, and it has seen things most men never dare to.'
         },
         {
             speaker: 'Professor Henslow',
-            text: 'Your first task: examine these specimens and catalogue what you see. Every living thing is made of tiny units called cells. Learn to identify their parts, and you shall understand the very building blocks of life.'
+            text: 'Your charge is this: peer into the specimens and name what no untrained eye can find. All living things — every beast, every leaf — are wrought from minute chambers called cells. Master their hidden parts, and you grasp the very foundation stone of life.'
         },
         {
             speaker: '',
-            text: 'You peer through the brass microscope at a thin slice of onion skin. Tiny rectangular compartments come into focus — each one a cell, a miniature world unto itself. You begin sketching in your journal...'
+            text: 'A single candle gutters beside the brass instrument. You bend to the eyepiece, and a sliver of onion skin swims into focus — rank upon rank of silent, walled chambers, each a small world holding its breath. Your hand reaches for the journal, and you begin to draw...'
         }
     ],
     puzzles: [
@@ -77,7 +82,7 @@ Game.registerChapter({
             explanation: 'Plant cells have everything animal cells have, PLUS a cell wall (for support), large central vacuole (for storage and turgor), and chloroplasts (for photosynthesis).',
             storyBefore: {
                 speaker: '',
-                text: 'You switch to a leaf specimen. The cells here are different — more rigid, more structured. You notice green bodies inside and a large clear space in the centre. These must be the plant-specific structures Professor Henslow mentioned!'
+                text: 'You exchange the onion for a sliver of green leaf. At once the chambers change their nature — rigid, ordered, fortress-like, with strange green bodies adrift inside and a great clear hollow at the heart of each. So these are the secrets Henslow whispered of: the things that set the green kingdom apart from the beasts.'
             },
             diagram: {
                 viewBox: '0 0 500 420',
@@ -173,7 +178,7 @@ Game.registerChapter({
             explanation: 'Living things are organised in levels: Cells (basic unit) → Tissues (group of similar cells) → Organs (group of tissues) → Organ Systems (group of organs) → Organism (complete living thing).',
             storyBefore: {
                 speaker: 'Professor Henslow',
-                text: 'Excellent observations! Now, consider this: a single cell is remarkable, but how do cells come together to form something as complex as a human body? There are levels of organisation — from the simplest to the most complex.'
+                text: 'Your eye sharpens — good. But heed this riddle: a lone cell is a marvel, yet how do such specks conspire to raise a creature as vast and intricate as a man? There is an order to it, a ladder climbing from the smallest part to the whole living being. Set its rungs in their proper place.'
             },
             items: [
                 'Cells — the basic unit of life',
