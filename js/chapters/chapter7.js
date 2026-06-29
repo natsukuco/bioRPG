@@ -1,18 +1,23 @@
 Game.registerChapter({
     title: 'Respiration in Humans',
     location: 'London, England — The Royal Society',
+    lore: [
+        'The voyage is ended, but the greatest trial yet remains — to lay one\'s knowledge bare before the learned and unforgiving.',
+        'Deep within every living cell burns a quiet fire, and from its flame springs all the vigour of life.',
+        'All roads of your long journey converge here, upon a single question: whence comes the spark that drives the living?'
+    ],
     story: [
         {
             speaker: 'Charles Darwin',
-            text: 'We have returned to England at last! The Royal Society has invited you to present your findings. Your final challenge: explain how living cells obtain the energy they need to survive.'
+            text: 'England at last — the long voyage is run! And now the Royal Society summons you to lay your findings before them. This is the final reckoning: you must reveal how the living cell, that smallest of chambers, draws forth the very energy by which it lives.'
         },
         {
             speaker: 'Charles Darwin',
-            text: 'Everything connects: the food we studied in the rainforest, the digestion we mapped in Patagonia, the blood transport from the Cape — it all leads to this. Cells need glucose and oxygen to release energy through respiration.'
+            text: 'Mark how it all converges, as rivers to the sea: the molecules named in the rainforest, the digestion charted in Patagonia, the red tide traced at the Cape — every thread leads to this. The cell takes glucose and air, and from their union wrests the fire we call energy. This is respiration.'
         },
         {
             speaker: '',
-            text: 'You stand before the assembled Fellows of the Royal Society in London. Portraits of Newton and Hooke gaze down from the walls. To earn your place among these great minds, you must demonstrate mastery of the final piece of the puzzle: how every living cell releases the energy it needs to function.'
+            text: 'You stand at last beneath the high ceiling of the Royal Society, the painted eyes of Newton and Hooke gazing down in cold judgement. To win your place among these immortals, you must master the final secret of your long voyage: how every living cell, in silence and in darkness, kindles the energy that keeps it from the grave.'
         }
     ],
     puzzles: [
@@ -49,7 +54,7 @@ Game.registerChapter({
             explanation: 'Aerobic respiration: Glucose + Oxygen → Carbon dioxide + Water + Energy. This occurs in the mitochondria of cells and is the main way cells release energy for life processes.',
             storyBefore: {
                 speaker: 'Royal Society Fellow',
-                text: 'Young naturalist, please write upon the board the fundamental equation that describes how cells release energy. Every Fellow here knows it — show us that you do too!'
+                text: 'Step forward, young naturalist, and inscribe upon the board the fundamental equation by which the living cell releases its energy. Every Fellow in this hall has it by heart — let us see whether you have earned the right to stand among us.'
             },
             text: 'The word equation for aerobic respiration:\n\n{0} + {1} → {2} + {3} + Energy\n\nThis reaction takes place in the {4} of cells.',
             blanks: [
@@ -69,7 +74,7 @@ Game.registerChapter({
             explanation: 'Oxygen journey: Air → lungs (alveoli) → diffuses into blood → binds to haemoglobin in red blood cells → pumped by heart through arteries → releases at capillaries → diffuses into cells → enters mitochondria → used in aerobic respiration.',
             storyBefore: {
                 speaker: '',
-                text: 'The Fellows lean forward with interest. "Now trace for us," says the chairman, "the complete path of an oxygen molecule — from the air we breathe to the very organelle where it is consumed." This requires connecting everything you have learned...'
+                text: 'The Fellows lean forward as one, their interest kindled. "Now trace for us," intones the chairman, his voice echoing in the great hall, "the entire passage of a single breath of air — from the lungs that draw it in, to the very organelle in which it is at last consumed." Every lesson of your long voyage must be woven into one...'
             },
             height: 400,
             nodes: [
@@ -108,7 +113,7 @@ Game.registerChapter({
             explanation: 'During intense exercise, muscles respire anaerobically, producing lactic acid. After exercise, extra oxygen is needed to break down this lactic acid — this is called "oxygen debt." Heavy breathing repays this debt by supplying the extra oxygen needed.',
             storyBefore: {
                 speaker: 'Royal Society Fellow',
-                text: 'One final question! After a man runs a great distance, he pants and gasps for many minutes after stopping. If he has stopped exercising, why does he still need so much air? This has puzzled physicians for years!'
+                text: 'One last question, and weigh it well! When a man has run himself to the brink, he stands gasping like a landed fish long after his legs have stilled. If the labour is done, why does his body still cry out so desperately for air? This riddle has confounded the physicians of London for a generation!'
             },
             options: [
                 'The body must repay "oxygen debt" — extra O₂ is needed to break down lactic acid that built up during anaerobic respiration',
@@ -127,7 +132,7 @@ Game.registerChapter({
             explanation: 'This connects ALL chapters: Food (Ch3) → Digestion by enzymes (Ch4-5) → Absorption in small intestine (Ch5) → Transport in blood (Ch6) → Delivered to cells → Used in respiration with O₂ (Ch7) → Energy released in mitochondria. The whole voyage of discovery connected!',
             storyBefore: {
                 speaker: 'Charles Darwin',
-                text: 'And now — your masterwork! Show these distinguished Fellows how EVERYTHING connects. Trace the complete journey of a glucose molecule, from the food on your plate to the energy released in your cells. This is the culmination of all we have learned!'
+                text: 'And now — your masterwork, the crown of the whole voyage! Show these distinguished Fellows how all of it binds together as one. Trace the entire odyssey of a single grain of glucose: from the food upon the plate to the fire of energy loosed within the living cell. Everything we have suffered and learned has led to this one moment!'
             },
             height: 450,
             nodes: [

@@ -31,7 +31,26 @@ const Game = (() => {
     function init() {
         loadSave();
         bindEvents();
+        spawnEmbers();
         showTitleScreen();
+    }
+
+    function spawnEmbers() {
+        const field = document.getElementById('ember-field');
+        if (!field) return;
+        const count = 18;
+        for (let i = 0; i < count; i++) {
+            const ember = document.createElement('div');
+            ember.className = 'ember';
+            ember.style.left = Math.random() * 100 + '%';
+            const duration = 7 + Math.random() * 9;
+            ember.style.animationDuration = duration + 's';
+            ember.style.animationDelay = (-Math.random() * duration) + 's';
+            const size = 2 + Math.random() * 2.5;
+            ember.style.width = size + 'px';
+            ember.style.height = size + 'px';
+            field.appendChild(ember);
+        }
     }
 
     function registerChapter(chapterData) {
@@ -129,6 +148,17 @@ const Game = (() => {
         return '★'.repeat(count) + '☆'.repeat(3 - count);
     }
 
+    const LORE_TIPS = [
+        'Nature, it is said, keeps her secrets locked within forms too small for the naked eye.',
+        'The careful observer sees not chaos, but a hidden order writ across all living things.',
+        'To name a thing is the first step toward understanding it — so the old naturalists believed.',
+        'Every specimen tells a story, if one only learns the language in which it is written.',
+        'Knowledge, like the tide, comes slowly — yet it reshapes whole coastlines in time.'
+    ];
+
+    let loadingTimer = null;
+    let loadingHandler = null;
+
     function startChapter(index) {
         state.currentChapter = index;
         state.currentStoryIndex = 0;
@@ -137,7 +167,35 @@ const Game = (() => {
         state.chapterXP[index] = 0;
         state.inStory = true;
         save();
-        showStory();
+        showLoadingScreen(index, showStory);
+    }
+
+    function showLoadingScreen(index, onDone) {
+        const chapter = chapters[index];
+        const loreSource = (chapter.lore && chapter.lore.length)
+            ? chapter.lore
+            : LORE_TIPS;
+        const lore = loreSource[Math.floor(Math.random() * loreSource.length)];
+
+        document.getElementById('loading-chapter').textContent =
+            `Chapter ${index + 1}: ${chapter.title}`;
+        document.getElementById('loading-lore').textContent = lore;
+        switchScreen('loading-screen');
+
+        let finished = false;
+        const finish = () => {
+            if (finished) return;
+            finished = true;
+            if (loadingTimer) { clearTimeout(loadingTimer); loadingTimer = null; }
+            const screen = document.getElementById('loading-screen');
+            screen.removeEventListener('click', loadingHandler);
+            loadingHandler = null;
+            onDone();
+        };
+
+        loadingHandler = finish;
+        document.getElementById('loading-screen').addEventListener('click', loadingHandler);
+        loadingTimer = setTimeout(finish, 3200);
     }
 
     function showStory() {

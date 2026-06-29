@@ -1,18 +1,23 @@
 Game.registerChapter({
     title: 'Transport in Humans',
     location: 'Cape of Good Hope — A Sailor\'s Wound',
+    lore: [
+        'Beneath the skin runs a hidden river, red and tireless, that visits every corner of the living realm.',
+        'At the heart of the body sits a tireless engine, beating out the rhythm of life itself.',
+        'A wound lays bare what the living guard most jealously — the secret roads by which the blood travels.'
+    ],
     story: [
         {
             speaker: 'Ship\'s Surgeon',
-            text: 'A man has been injured by a falling spar! He is bleeding heavily. Quick — help me staunch the wound while I explain to you the remarkable system that carries blood throughout the body.'
+            text: 'A spar has come down upon one of the hands — he bleeds like a stuck hog! Quickly now, lend me your hands to staunch it. And while we labour, mark well the marvel laid open before us: the great hidden network that carries the blood to every last corner of a man.'
         },
         {
             speaker: 'Charles Darwin',
-            text: 'The circulatory system! Think of it as a network of rivers and streams carrying nutrients from the digestive system to every cell in the body. The heart is the pump that drives it all.'
+            text: 'The circulatory system — behold it! Picture a country threaded with rivers and streams, bearing nourishment from the gut to every living cell in the body\'s vast dominion. And at its centre, never resting, beats the heart — the tireless engine that drives the whole red tide.'
         },
         {
             speaker: '',
-            text: 'As you assist the surgeon, you observe the blood closely — it is not simply a red liquid. Through a lens, you can see different components: red cells, white cells, and a straw-coloured fluid. Each has its own vital role. The heart beats steadily, pushing blood through two circuits...'
+            text: 'Kneeling beside the surgeon, you study the blood as it wells — and find it is no simple red fluid at all. Through the lens swim distinct citizens of this inner world: red cells, white cells, and a pale straw-coloured sea that bears them. Each plays its part. And beneath your fingers the heart beats on, driving its cargo through not one circuit, but two...'
         }
     ],
     puzzles: [
@@ -63,7 +68,7 @@ Game.registerChapter({
             explanation: 'Double circulation: (1) Pulmonary circuit — right ventricle pumps deoxygenated blood to lungs, where it picks up oxygen, then returns to left atrium. (2) Systemic circuit — left ventricle pumps oxygenated blood to body, delivers oxygen, then returns to right atrium.',
             storyBefore: {
                 speaker: 'Charles Darwin',
-                text: 'The blood makes TWO circuits — hence "double circulation." One circuit goes to the lungs for oxygen, and the other carries that oxygen to the body. Trace the complete path!'
+                text: 'Here lies the cunning of it: the blood does not run one loop, but two — "double circulation," as I have come to call it. One circuit ventures to the lungs to drink in air; the other carries that precious breath to every corner of the body. Follow the whole winding road, and lose not the thread!'
             },
             height: 400,
             nodes: [
@@ -87,7 +92,7 @@ Game.registerChapter({
             explanation: 'Blood has 4 components: Red blood cells (carry oxygen using haemoglobin), White blood cells (fight infection), Platelets (blood clotting), Plasma (liquid that carries dissolved substances like glucose, CO₂, urea).',
             storyBefore: {
                 speaker: 'Ship\'s Surgeon',
-                text: 'Look at this blood sample under the lens! See the different components? Each has a critical role. The red cells carry oxygen, the white cells fight infection, the tiny fragments help seal wounds, and the liquid carries everything else.'
+                text: 'Set your eye to the lens and behold this drop of blood — a whole teeming nation in miniature! Each citizen bears its charge: the red cells ferry the breath of life, the white cells make war upon invaders, the little fragments rush to seal a breach, and the pale tide carries all the rest upon its current.'
             },
             leftTitle: 'Component',
             rightTitle: 'Function',
