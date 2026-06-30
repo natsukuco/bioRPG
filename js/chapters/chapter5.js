@@ -24,7 +24,7 @@ Game.registerChapter({
         {
             type: 'labeling',
             title: 'The Digestive System',
-            instruction: 'Label the organs of the human digestive system in order from top to bottom.',
+            instruction: 'Drag each label onto the matching numbered slot. (You may also tap a label, then tap a slot.)',
             xp: 25,
             hints: ['Start from the mouth at the top.', 'The small intestine is where most absorption happens.'],
             explanation: 'The alimentary canal: Mouth → Oesophagus → Stomach → Small intestine (duodenum + ileum) → Large intestine → Rectum → Anus. The liver and pancreas produce secretions that aid digestion.',

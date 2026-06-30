@@ -24,7 +24,7 @@ Game.registerChapter({
         {
             type: 'labeling',
             title: 'The Lock and Key Model',
-            instruction: 'Label the parts of the enzyme-substrate interaction. Select a label, then click the correct position.',
+            instruction: 'Drag each label onto the matching numbered slot. (You may also tap a label, then tap a slot.)',
             xp: 20,
             hints: ['The enzyme is the larger structure with a specific shape.', 'The active site is the groove where the substrate fits.'],
             explanation: 'In the lock-and-key model, the enzyme has a specifically shaped active site that only one type of substrate can fit into. When the substrate binds, the reaction occurs and products are released. The enzyme is unchanged and can be reused.',
