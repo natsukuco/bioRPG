@@ -24,7 +24,7 @@ Game.registerChapter({
         {
             type: 'labeling',
             title: 'Structure of the Heart',
-            instruction: 'Label the four chambers and major blood vessels of the heart.',
+            instruction: 'Drag each label onto the matching numbered slot. (You may also tap a label, then tap a slot.)',
             xp: 30,
             hints: ['The left side of the heart (your right when looking at a diagram) pumps to the body.', 'Ventricles are the lower, thicker-walled chambers.'],
             explanation: 'The heart has 4 chambers: right atrium (receives deoxygenated blood from body), right ventricle (pumps to lungs), left atrium (receives oxygenated blood from lungs), left ventricle (pumps to body — thickest wall). Valves prevent backflow.',

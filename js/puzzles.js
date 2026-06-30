@@ -253,11 +253,12 @@ const Puzzles = (() => {
         }
     }
 
-    // --- LABELING ---
+    // --- LABELING (numbered diagram + neat answer list, drag-and-drop) ---
     function renderLabeling(area, puzzle) {
         puzzleState.placements = {};
         puzzleState.selectedLabel = null;
 
+        // Specimen plate: diagram + numbered pins
         const container = document.createElement('div');
         container.className = 'labeling-container';
 
@@ -267,35 +268,60 @@ const Puzzles = (() => {
         svg.innerHTML = puzzle.diagram.svg;
         container.appendChild(svg);
 
-        const targets = document.createElement('div');
-        targets.className = 'label-targets';
-
+        const pins = document.createElement('div');
+        pins.className = 'label-pins';
         puzzle.targets.forEach((target, i) => {
-            const dot = document.createElement('div');
-            dot.className = 'label-target';
-            dot.style.left = target.x + '%';
-            dot.style.top = target.y + '%';
-            dot.dataset.index = i;
-            dot.title = 'Drop a label here';
-            dot.addEventListener('click', () => placeLabel(dot, i));
-            targets.appendChild(dot);
+            const pin = document.createElement('div');
+            pin.className = 'label-pin';
+            pin.style.left = target.x + '%';
+            pin.style.top = target.y + '%';
+            pin.textContent = (i + 1);
+            pin.dataset.index = i;
+            pins.appendChild(pin);
         });
-
-        container.appendChild(targets);
+        container.appendChild(pins);
         area.appendChild(container);
 
+        // Neat, straight numbered answer slots (drop zones)
+        const answers = document.createElement('div');
+        answers.className = 'label-answers';
+        puzzle.targets.forEach((target, i) => {
+            const slot = document.createElement('div');
+            slot.className = 'answer-slot';
+            slot.dataset.index = i;
+            slot.innerHTML = `<span class="slot-num">${i + 1}</span><span class="slot-drop">Drop a label here</span>`;
+
+            slot.addEventListener('click', () => placeInSlot(i));
+            slot.addEventListener('dragover', (e) => { e.preventDefault(); slot.classList.add('drag-over'); });
+            slot.addEventListener('dragleave', () => slot.classList.remove('drag-over'));
+            slot.addEventListener('drop', (e) => {
+                e.preventDefault();
+                slot.classList.remove('drag-over');
+                const label = e.dataTransfer.getData('text/plain');
+                if (label) { puzzleState.selectedLabel = label; placeInSlot(i); }
+            });
+            answers.appendChild(slot);
+        });
+        area.appendChild(answers);
+
+        // Draggable label bank
         const bank = document.createElement('div');
         bank.className = 'label-bank';
-
         const shuffledLabels = [...puzzle.labels].sort(() => Math.random() - 0.5);
         shuffledLabels.forEach(label => {
             const chip = document.createElement('div');
             chip.className = 'label-chip';
             chip.textContent = label;
+            chip.draggable = true;
             chip.addEventListener('click', () => selectLabel(chip, label));
+            chip.addEventListener('dragstart', (e) => {
+                if (chip.classList.contains('placed')) { e.preventDefault(); return; }
+                selectLabel(chip, label);
+                e.dataTransfer.setData('text/plain', label);
+                e.dataTransfer.effectAllowed = 'move';
+            });
             bank.appendChild(chip);
         });
-
         area.appendChild(bank);
     }
 
@@ -306,52 +332,71 @@ const Puzzles = (() => {
         puzzleState.selectedLabel = label;
     }
 
-    function placeLabel(dot, targetIndex) {
-        if (!puzzleState.selectedLabel) return;
+    function placeInSlot(slotIndex) {
+        const label = puzzleState.selectedLabel;
+        if (!label) return;
 
-        if (puzzleState.placements[targetIndex]) {
-            const oldLabel = puzzleState.placements[targetIndex];
-            document.querySelectorAll('.label-chip').forEach(c => {
-                if (c.textContent === oldLabel) c.classList.remove('placed');
-            });
+        // A label can occupy only one slot — clear it from any other slot first
+        for (const idx in puzzleState.placements) {
+            if (puzzleState.placements[idx] === label && parseInt(idx) !== slotIndex) {
+                delete puzzleState.placements[idx];
+                updateSlotDisplay(parseInt(idx), null);
+            }
         }
 
-        puzzleState.placements[targetIndex] = puzzleState.selectedLabel;
-        dot.classList.add('filled');
-        dot.title = puzzleState.selectedLabel;
-
-        const labelEl = dot.querySelector('.placed-label') || document.createElement('span');
-        labelEl.className = 'placed-label';
-        labelEl.style.cssText = 'position:absolute;top:50%;left:120%;transform:translateY(-50%);white-space:nowrap;font-size:0.75rem;color:var(--ink);font-weight:bold;';
-        labelEl.textContent = puzzleState.selectedLabel;
-        dot.appendChild(labelEl);
-
-        document.querySelectorAll('.label-chip').forEach(c => {
-            if (c.textContent === puzzleState.selectedLabel) c.classList.add('placed');
-        });
+        puzzleState.placements[slotIndex] = label;
+        updateSlotDisplay(slotIndex, label);
+        refreshChipStates();
 
         puzzleState.selectedLabel = null;
         document.querySelectorAll('.label-chip').forEach(c => c.classList.remove('selected'));
     }
 
+    function updateSlotDisplay(slotIndex, label) {
+        const slot = document.querySelector(`.answer-slot[data-index="${slotIndex}"]`);
+        if (!slot) return;
+        const drop = slot.querySelector('.slot-drop');
+        if (label) {
+            slot.classList.add('filled');
+            drop.textContent = label;
+        } else {
+            slot.classList.remove('filled', 'correct', 'wrong');
+            drop.textContent = 'Drop a label here';
+        }
+    }
+
+    function refreshChipStates() {
+        const placed = new Set(Object.values(puzzleState.placements));
+        document.querySelectorAll('.label-chip').forEach(c => {
+            if (placed.has(c.textContent)) c.classList.add('placed');
+            else c.classList.remove('placed');
+        });
+    }
+
     function checkLabeling(puzzle) {
         if (Object.keys(puzzleState.placements).length < puzzle.targets.length) {
-            return { correct: false, message: 'Place all labels before checking.' };
+            return { correct: false, message: 'Place every label before checking.' };
         }
         const correct = puzzle.targets.every((target, i) => puzzleState.placements[i] === target.correctLabel);
         return { correct };
     }
 
     function revealLabeling(puzzle, result) {
-        const dots = document.querySelectorAll('.label-target');
-        dots.forEach((dot, i) => {
-            if (puzzleState.placements[i] === puzzle.targets[i].correctLabel) {
-                dot.classList.add('correct');
-            } else {
-                dot.classList.add('wrong');
-                const label = dot.querySelector('.placed-label');
-                if (label) label.textContent = `${puzzleState.placements[i] || '?'} → ${puzzle.targets[i].correctLabel}`;
+        puzzle.targets.forEach((target, i) => {
+            const slot = document.querySelector(`.answer-slot[data-index="${i}"]`);
+            const given = puzzleState.placements[i];
+            const isRight = given === target.correctLabel;
+            if (slot) {
+                const drop = slot.querySelector('.slot-drop');
+                if (isRight) {
+                    slot.classList.add('correct');
+                } else {
+                    slot.classList.add('wrong');
+                    drop.innerHTML = `${given || '—'} <span class="slot-correct">&rarr; ${target.correctLabel}</span>`;
+                }
             }
+            const pin = document.querySelector(`.label-pin[data-index="${i}"]`);
+            if (pin) pin.classList.add(isRight ? 'correct' : 'wrong');
         });
     }
 

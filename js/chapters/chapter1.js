@@ -17,131 +17,92 @@ Game.registerChapter({
         },
         {
             speaker: '',
-            text: 'A single candle gutters beside the brass instrument. You bend to the eyepiece, and a sliver of onion skin swims into focus — rank upon rank of silent, walled chambers, each a small world holding its breath. Your hand reaches for the journal, and you begin to draw...'
+            text: 'A single candle gutters beside the brass instrument. With the tip of a clean blade you scrape a little matter from inside your own cheek and smear it upon the glass. You bend to the eyepiece — and there they are: soft, rounded chambers drifting in stillness, each one a living cell from your own body. Your hand reaches for the journal, and you begin to draw...'
         }
     ],
     puzzles: [
         {
             type: 'labeling',
-            title: 'The Animal Cell',
-            instruction: 'Label the parts of this animal cell. Select a label, then click on the correct position.',
+            title: 'The Cheek Cell',
+            instruction: 'Drag each label onto the matching numbered slot. (You may also tap a label, then tap a slot.)',
             xp: 20,
-            hints: ['The nucleus is the large, dark circular structure in the centre.', 'Mitochondria are the small bean-shaped organelles scattered in the cytoplasm.'],
-            explanation: 'Animal cells contain a cell membrane, cytoplasm, nucleus (with genetic material), and mitochondria (for energy). They lack a cell wall and chloroplasts.',
+            hints: ['The nucleus is the large, dark circular structure near the centre.', 'Mitochondria are the small bean-shaped organelles scattered in the cytoplasm.'],
+            explanation: 'A cheek cell is a typical animal cell. It contains a cell membrane, cytoplasm, a nucleus (with genetic material) and mitochondria (for energy). Animal cells have no cell wall, no chloroplasts and no large vacuole.',
             diagram: {
                 viewBox: '0 0 500 400',
                 svg: `
                     <!-- Cell membrane - outer boundary -->
-                    <ellipse cx="250" cy="200" rx="190" ry="150" fill="rgba(210,180,140,0.15)" stroke="#5c3d2e" stroke-width="2.5"/>
+                    <ellipse cx="250" cy="205" rx="195" ry="150" fill="rgba(210,180,140,0.15)" stroke="#5c3d2e" stroke-width="2.5"/>
                     <!-- Cytoplasm fill - area between membrane and nucleus -->
-                    <ellipse cx="250" cy="200" rx="186" ry="146" fill="rgba(232,213,163,0.25)" stroke="none"/>
-                    <!-- Nucleus - large circle in centre -->
-                    <circle cx="250" cy="190" r="55" fill="rgba(139,105,20,0.18)" stroke="#5c3d2e" stroke-width="2"/>
+                    <ellipse cx="250" cy="205" rx="190" ry="146" fill="rgba(232,213,163,0.25)" stroke="none"/>
+                    <!-- Nucleus - large circle near centre -->
+                    <circle cx="250" cy="205" r="52" fill="rgba(139,105,20,0.18)" stroke="#5c3d2e" stroke-width="2"/>
                     <!-- Nucleolus - small dark circle inside nucleus -->
-                    <circle cx="260" cy="180" r="14" fill="rgba(92,61,46,0.35)" stroke="#5c3d2e" stroke-width="1.5"/>
-                    <!-- Mitochondria - bean shapes scattered in cytoplasm (OUTSIDE nucleus) -->
-                    <ellipse cx="120" cy="160" rx="22" ry="10" fill="rgba(178,102,60,0.25)" stroke="#6b3a2a" stroke-width="1.5" transform="rotate(-25,120,160)"/>
-                    <path d="M 108 155 Q 120 165 132 155" stroke="#6b3a2a" stroke-width="0.8" fill="none"/>
-                    <ellipse cx="370" cy="140" rx="22" ry="10" fill="rgba(178,102,60,0.25)" stroke="#6b3a2a" stroke-width="1.5" transform="rotate(20,370,140)"/>
-                    <path d="M 358 135 Q 370 145 382 135" stroke="#6b3a2a" stroke-width="0.8" fill="none"/>
-                    <ellipse cx="340" cy="280" rx="22" ry="10" fill="rgba(178,102,60,0.25)" stroke="#6b3a2a" stroke-width="1.5" transform="rotate(-15,340,280)"/>
-                    <path d="M 328 275 Q 340 285 352 275" stroke="#6b3a2a" stroke-width="0.8" fill="none"/>
-                    <!-- Leader lines from label areas to structures -->
-                    <line x1="480" y1="60" x2="430" y2="120" stroke="#8b7355" stroke-width="1" stroke-dasharray="3,2"/>
-                    <circle cx="430" cy="120" r="3" fill="#8b7355"/>
-                    <line x1="20" y1="60" x2="200" y2="185" stroke="#8b7355" stroke-width="1" stroke-dasharray="3,2"/>
-                    <circle cx="200" cy="185" r="3" fill="#8b7355"/>
-                    <line x1="20" y1="120" x2="258" y2="178" stroke="#8b7355" stroke-width="1" stroke-dasharray="3,2"/>
-                    <circle cx="258" cy="178" r="3" fill="#8b7355"/>
-                    <line x1="20" y1="300" x2="120" y2="162" stroke="#8b7355" stroke-width="1" stroke-dasharray="3,2"/>
-                    <circle cx="120" cy="162" r="3" fill="#8b7355"/>
-                    <line x1="480" y1="340" x2="160" y2="250" stroke="#8b7355" stroke-width="1" stroke-dasharray="3,2"/>
-                    <circle cx="160" cy="250" r="3" fill="#8b7355"/>
+                    <circle cx="250" cy="205" r="15" fill="rgba(92,61,46,0.35)" stroke="#5c3d2e" stroke-width="1.5"/>
+                    <!-- Mitochondria - bean shapes in cytoplasm (OUTSIDE nucleus) -->
+                    <ellipse cx="120" cy="150" rx="22" ry="10" fill="rgba(178,102,60,0.3)" stroke="#6b3a2a" stroke-width="1.5" transform="rotate(-25,120,150)"/>
+                    <path d="M 108 145 Q 120 155 132 145" stroke="#6b3a2a" stroke-width="0.8" fill="none"/>
+                    <ellipse cx="380" cy="150" rx="22" ry="10" fill="rgba(178,102,60,0.3)" stroke="#6b3a2a" stroke-width="1.5" transform="rotate(20,380,150)"/>
+                    <ellipse cx="345" cy="290" rx="22" ry="10" fill="rgba(178,102,60,0.3)" stroke="#6b3a2a" stroke-width="1.5" transform="rotate(-15,345,290)"/>
                     <!-- Title -->
-                    <text x="250" y="25" text-anchor="middle" font-size="14" fill="#5c3d2e" font-weight="bold">Animal Cell</text>
-                    <!-- Annotation labels on diagram for visual clarity -->
-                    <text x="250" y="195" text-anchor="middle" font-size="9" fill="#8b7355" font-style="italic">(dark circle = nucleus)</text>
-                    <text x="120" y="185" text-anchor="middle" font-size="8" fill="#8b7355" font-style="italic">(bean shape)</text>
+                    <text x="250" y="28" text-anchor="middle" font-size="14" fill="#5c3d2e" font-weight="bold">Human Cheek Cell</text>
                 `
             },
             targets: [
-                { x: 96, y: 15, correctLabel: 'Cell Membrane' },
-                { x: 4, y: 15, correctLabel: 'Nucleus' },
-                { x: 4, y: 30, correctLabel: 'Nucleolus' },
-                { x: 4, y: 75, correctLabel: 'Mitochondrion' },
-                { x: 96, y: 85, correctLabel: 'Cytoplasm' }
+                { x: 50, y: 14, correctLabel: 'Cell Membrane' },
+                { x: 44, y: 44, correctLabel: 'Nucleus' },
+                { x: 50, y: 51, correctLabel: 'Nucleolus' },
+                { x: 24, y: 37, correctLabel: 'Mitochondrion' },
+                { x: 78, y: 62, correctLabel: 'Cytoplasm' }
             ],
             labels: ['Cell Membrane', 'Nucleus', 'Cytoplasm', 'Mitochondrion', 'Nucleolus']
         },
         {
             type: 'labeling',
             title: 'The Plant Cell',
-            instruction: 'Plant cells have extra structures that animal cells lack. Label this plant cell.',
+            instruction: 'Drag each label onto the matching numbered slot. (You may also tap a label, then tap a slot.)',
             xp: 25,
-            hints: ['The cell wall is the thick, rigid outermost boundary (rectangular shape).', 'Chloroplasts are the green oval shapes — they capture light for photosynthesis.'],
-            explanation: 'Plant cells have everything animal cells have, PLUS a cell wall (for support), large central vacuole (for storage and turgor), and chloroplasts (for photosynthesis).',
+            hints: ['The cell wall is the thick, rigid outermost boundary (rectangular shape). The cell membrane lies just inside it.', 'Chloroplasts are the green oval shapes — they capture light for photosynthesis.'],
+            explanation: 'A leaf cell is a typical plant cell. It has everything an animal cell has, PLUS a cell wall (for support), a large central vacuole (for storage and turgor), and chloroplasts (for photosynthesis).',
             storyBefore: {
                 speaker: '',
-                text: 'You exchange the onion for a sliver of green leaf. At once the chambers change their nature — rigid, ordered, fortress-like, with strange green bodies adrift inside and a great clear hollow at the heart of each. So these are the secrets Henslow whispered of: the things that set the green kingdom apart from the beasts.'
+                text: 'You set the cheek-smear aside and slide a sliver of green leaf beneath the lens. At once the chambers change their nature — rigid, ordered, fortress-like, with strange green bodies adrift inside and a great clear hollow at the heart of each. So these are the secrets Henslow whispered of: the things that set the green kingdom apart from the beasts of flesh.'
             },
             diagram: {
                 viewBox: '0 0 500 420',
                 svg: `
                     <!-- Cell wall - thick outer rectangle -->
-                    <rect x="30" y="40" width="440" height="340" rx="8" fill="none" stroke="#5c3d2e" stroke-width="4"/>
+                    <rect x="30" y="45" width="440" height="335" rx="8" fill="none" stroke="#5c3d2e" stroke-width="5"/>
                     <!-- Cell membrane - just inside wall -->
-                    <rect x="40" y="50" width="420" height="320" rx="6" fill="rgba(232,213,163,0.2)" stroke="#8b6914" stroke-width="2"/>
-                    <!-- Cytoplasm fill - between membrane and vacuole -->
-                    <rect x="42" y="52" width="416" height="316" rx="5" fill="rgba(210,190,150,0.15)" stroke="none"/>
+                    <rect x="42" y="57" width="416" height="311" rx="6" fill="rgba(232,213,163,0.2)" stroke="#8b6914" stroke-width="2"/>
+                    <!-- Cytoplasm fill -->
+                    <rect x="44" y="59" width="412" height="307" rx="5" fill="rgba(210,190,150,0.15)" stroke="none"/>
                     <!-- Large central vacuole - dominant feature -->
-                    <ellipse cx="260" cy="220" rx="120" ry="90" fill="rgba(180,210,230,0.15)" stroke="#5c7a9a" stroke-width="1.5" stroke-dasharray="4,2"/>
-                    <text x="260" y="225" text-anchor="middle" font-size="9" fill="#5c7a9a" font-style="italic">(large central vacuole)</text>
+                    <ellipse cx="265" cy="215" rx="120" ry="88" fill="rgba(180,210,230,0.18)" stroke="#5c7a9a" stroke-width="1.5" stroke-dasharray="5,3"/>
                     <!-- Nucleus - circle pushed to one side by vacuole -->
-                    <circle cx="110" cy="140" r="40" fill="rgba(139,105,20,0.18)" stroke="#5c3d2e" stroke-width="2"/>
-                    <!-- Nucleolus inside nucleus -->
-                    <circle cx="118" cy="132" r="10" fill="rgba(92,61,46,0.35)" stroke="#5c3d2e" stroke-width="1"/>
-                    <!-- Chloroplasts - green ovals scattered in cytoplasm -->
-                    <ellipse cx="400" cy="110" rx="18" ry="10" fill="rgba(45,120,39,0.3)" stroke="#2d7a27" stroke-width="1.5"/>
-                    <line x1="390" y1="110" x2="410" y2="110" stroke="#2d7a27" stroke-width="0.5"/>
-                    <line x1="387" y1="106" x2="413" y2="106" stroke="#2d7a27" stroke-width="0.5"/>
-                    <line x1="387" y1="114" x2="413" y2="114" stroke="#2d7a27" stroke-width="0.5"/>
-                    <ellipse cx="90" cy="300" rx="18" ry="10" fill="rgba(45,120,39,0.3)" stroke="#2d7a27" stroke-width="1.5"/>
-                    <line x1="80" y1="300" x2="100" y2="300" stroke="#2d7a27" stroke-width="0.5"/>
-                    <line x1="77" y1="296" x2="103" y2="296" stroke="#2d7a27" stroke-width="0.5"/>
-                    <line x1="77" y1="304" x2="103" y2="304" stroke="#2d7a27" stroke-width="0.5"/>
-                    <ellipse cx="420" cy="310" rx="18" ry="10" fill="rgba(45,120,39,0.3)" stroke="#2d7a27" stroke-width="1.5" transform="rotate(30,420,310)"/>
+                    <circle cx="110" cy="135" r="40" fill="rgba(139,105,20,0.18)" stroke="#5c3d2e" stroke-width="2"/>
+                    <circle cx="118" cy="128" r="10" fill="rgba(92,61,46,0.35)" stroke="#5c3d2e" stroke-width="1"/>
+                    <!-- Chloroplasts - green ovals with internal layers -->
+                    <ellipse cx="400" cy="110" rx="18" ry="10" fill="rgba(45,120,39,0.35)" stroke="#2d7a27" stroke-width="1.5"/>
+                    <line x1="388" y1="110" x2="412" y2="110" stroke="#2d7a27" stroke-width="0.5"/>
+                    <line x1="385" y1="106" x2="415" y2="106" stroke="#2d7a27" stroke-width="0.5"/>
+                    <line x1="385" y1="114" x2="415" y2="114" stroke="#2d7a27" stroke-width="0.5"/>
+                    <ellipse cx="95" cy="300" rx="18" ry="10" fill="rgba(45,120,39,0.35)" stroke="#2d7a27" stroke-width="1.5"/>
+                    <line x1="83" y1="300" x2="107" y2="300" stroke="#2d7a27" stroke-width="0.5"/>
+                    <ellipse cx="420" cy="310" rx="18" ry="10" fill="rgba(45,120,39,0.35)" stroke="#2d7a27" stroke-width="1.5" transform="rotate(30,420,310)"/>
                     <!-- Mitochondria in cytoplasm -->
-                    <ellipse cx="180" cy="330" rx="16" ry="8" fill="rgba(178,102,60,0.25)" stroke="#6b3a2a" stroke-width="1.5" transform="rotate(-10,180,330)"/>
-                    <path d="M 170 327 Q 180 335 190 327" stroke="#6b3a2a" stroke-width="0.7" fill="none"/>
-                    <ellipse cx="400" cy="200" rx="16" ry="8" fill="rgba(178,102,60,0.25)" stroke="#6b3a2a" stroke-width="1.5" transform="rotate(15,400,200)"/>
-                    <path d="M 390 197 Q 400 205 410 197" stroke="#6b3a2a" stroke-width="0.7" fill="none"/>
-                    <!-- Leader lines -->
-                    <line x1="8" y1="15" x2="30" y2="40" stroke="#8b7355" stroke-width="1" stroke-dasharray="3,2"/>
-                    <circle cx="30" cy="40" r="3" fill="#8b7355"/>
-                    <line x1="492" y1="15" x2="458" y2="52" stroke="#8b7355" stroke-width="1" stroke-dasharray="3,2"/>
-                    <circle cx="458" cy="52" r="3" fill="#8b7355"/>
-                    <line x1="8" y1="130" x2="70" y2="140" stroke="#8b7355" stroke-width="1" stroke-dasharray="3,2"/>
-                    <circle cx="70" cy="140" r="3" fill="#8b7355"/>
-                    <line x1="492" y1="220" x2="380" y2="220" stroke="#8b7355" stroke-width="1" stroke-dasharray="3,2"/>
-                    <circle cx="380" cy="220" r="3" fill="#8b7355"/>
-                    <line x1="492" y1="100" x2="418" y2="108" stroke="#8b7355" stroke-width="1" stroke-dasharray="3,2"/>
-                    <circle cx="418" cy="108" r="3" fill="#8b7355"/>
-                    <line x1="8" y1="350" x2="65" y2="260" stroke="#8b7355" stroke-width="1" stroke-dasharray="3,2"/>
-                    <circle cx="65" cy="260" r="3" fill="#8b7355"/>
+                    <ellipse cx="180" cy="335" rx="16" ry="8" fill="rgba(178,102,60,0.3)" stroke="#6b3a2a" stroke-width="1.5" transform="rotate(-10,180,335)"/>
                     <!-- Title -->
-                    <text x="250" y="28" text-anchor="middle" font-size="14" fill="#5c3d2e" font-weight="bold">Plant Cell</text>
-                    <!-- Annotation labels -->
-                    <text x="110" y="148" text-anchor="middle" font-size="8" fill="#8b7355" font-style="italic">(nucleus)</text>
-                    <text x="400" y="125" text-anchor="middle" font-size="8" fill="#2d7a27" font-style="italic">(green, with layers)</text>
+                    <text x="250" y="30" text-anchor="middle" font-size="14" fill="#5c3d2e" font-weight="bold">Plant Cell (from a leaf)</text>
                 `
             },
             targets: [
-                { x: 2, y: 4, correctLabel: 'Cell Wall' },
-                { x: 98, y: 4, correctLabel: 'Cell Membrane' },
-                { x: 2, y: 31, correctLabel: 'Nucleus' },
-                { x: 98, y: 52, correctLabel: 'Vacuole' },
-                { x: 98, y: 24, correctLabel: 'Chloroplast' },
-                { x: 2, y: 83, correctLabel: 'Cytoplasm' }
+                { x: 50, y: 9, correctLabel: 'Cell Wall' },
+                { x: 50, y: 88, correctLabel: 'Cell Membrane' },
+                { x: 22, y: 32, correctLabel: 'Nucleus' },
+                { x: 53, y: 51, correctLabel: 'Vacuole' },
+                { x: 80, y: 26, correctLabel: 'Chloroplast' },
+                { x: 18, y: 55, correctLabel: 'Cytoplasm' }
             ],
             labels: ['Cell Wall', 'Cell Membrane', 'Nucleus', 'Vacuole', 'Chloroplast', 'Cytoplasm']
         },
@@ -191,8 +152,8 @@ Game.registerChapter({
     ],
     journal: [
         'All living things are made of cells — the basic unit of life.',
-        'Animal cells have: cell membrane, cytoplasm, nucleus, and mitochondria.',
-        'Plant cells also have: cell wall, large central vacuole, and chloroplasts.',
+        'Animal cells (e.g. a cheek cell) have: cell membrane, cytoplasm, nucleus, and mitochondria.',
+        'Plant cells (e.g. a leaf cell) also have: cell wall, large central vacuole, and chloroplasts.',
         'The nucleus contains DNA and controls cell activities.',
         'Mitochondria are the "powerhouses" — they release energy through respiration.',
         'Levels of organisation: Cell → Tissue → Organ → Organ System → Organism.'
