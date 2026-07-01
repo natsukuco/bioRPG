@@ -31,31 +31,29 @@ Game.registerChapter({
             options: [
                 'Diffusion — particles move from high to low concentration',
                 'Osmosis — water moves across a membrane',
-                'Active transport — particles move against concentration gradient',
                 'Filtration — particles are forced through a filter'
             ],
             correctIndex: 0
         },
         {
-            type: 'tracing',
-            title: 'Osmosis Through a Membrane',
-            instruction: 'Trace the path of water molecules during osmosis. Click the nodes in the correct order.',
+            type: 'sequencing',
+            flow: true,
+            title: 'Osmosis — the Flow of Water',
+            instruction: 'Build the process flow. Drag the steps into the correct order, from the dilute solution across to the concentrated one.',
             xp: 25,
-            hints: ['Water moves from a dilute solution (more water) to a concentrated solution (less water).', 'The membrane only allows water to pass, not the sugar.'],
-            explanation: 'In osmosis, water moves from a region of higher water potential (dilute solution) to a region of lower water potential (concentrated solution) through a partially permeable membrane.',
+            hints: ['Begin on the dilute side, where there is MORE water.', 'Water crosses the membrane toward the concentrated side, where there is LESS water.'],
+            explanation: 'In osmosis, water moves from a region of higher water potential (dilute solution, more water) to a region of lower water potential (concentrated solution, less water) through a partially permeable membrane. The membrane lets water pass but not the dissolved sugar.',
             storyBefore: {
                 speaker: 'Charles Darwin',
-                text: 'Come, let us put the riddle to the test. Between two solutions — one weak, one strong — I have stretched a thin membrane, a gatekeeper that suffers only certain travellers to pass. Watch now, and tell me which way the water chooses to flow. This "partially permeable membrane" guards its threshold jealously.'
+                text: 'Come, let us put the riddle to the test. Between two solutions — one weak, one strong — I have stretched a thin membrane, a gatekeeper that suffers only certain travellers to pass. Set down the stages of the water\'s journey in their proper order, and the law of osmosis shall reveal itself.'
             },
-            height: 350,
-            nodes: [
-                { label: 'Dilute Solution\n(more water)', x: 20, y: 50 },
-                { label: 'Water molecules\ngather at membrane', x: 40, y: 50 },
-                { label: 'Partially Permeable\nMembrane', x: 55, y: 50 },
-                { label: 'Water passes\nthrough membrane', x: 70, y: 50 },
-                { label: 'Concentrated Solution\n(less water)', x: 88, y: 50 }
-            ],
-            correctPath: [0, 1, 2, 3, 4]
+            items: [
+                'A DILUTE solution (more water) lies on one side of the membrane',
+                'Water molecules are more numerous on the dilute side',
+                'Water crosses the partially permeable membrane (the sugar cannot)',
+                'Water moves toward the CONCENTRATED solution (less water)',
+                'Both sides approach balance as the concentrated side gains water'
+            ]
         },
         {
             type: 'sequencing',
@@ -79,23 +77,21 @@ Game.registerChapter({
         {
             type: 'journal-entry',
             title: 'Darwin\'s Journal: Movement of Substances',
-            instruction: 'Complete Darwin\'s journal entry about the three types of transport.',
+            instruction: 'Complete Darwin\'s journal entry about the two types of transport.',
             xp: 20,
-            hints: ['Diffusion moves from HIGH to LOW concentration.', 'Active transport requires energy because it moves AGAINST the gradient.'],
-            explanation: 'Diffusion: high → low concentration (no energy). Osmosis: water from high water potential to low water potential through a partially permeable membrane. Active transport: low → high concentration (requires energy from respiration).',
-            text: 'Journal Entry, 15th March 1832: Today I have identified three ways substances move in living things. {0} is the movement of particles from a region of higher concentration to lower concentration. {1} is the movement of water through a {2} membrane, from a dilute solution to a more concentrated one. Finally, {3} requires energy from the cell, as it moves substances against the concentration gradient — from low to high concentration.',
+            hints: ['Diffusion moves particles from HIGH to LOW concentration.', 'Osmosis is specifically the movement of WATER across a partially permeable membrane.'],
+            explanation: 'Diffusion: net movement of particles from high to low concentration (no energy needed). Osmosis: movement of water from a dilute solution (high water potential) to a concentrated solution (low water potential) through a partially permeable membrane.',
+            text: 'Journal Entry, 15th March 1832: Today I have studied two ways that substances move in living things. {0} is the movement of particles from a region of higher concentration to a region of lower concentration, and it needs no energy. {1} is the movement of water through a {2} membrane, from a dilute solution toward a more concentrated one.',
             blanks: [
                 { answers: ['Diffusion', 'diffusion'] },
                 { answers: ['Osmosis', 'osmosis'] },
-                { answers: ['partially permeable', 'semi-permeable', 'selectively permeable'] },
-                { answers: ['active transport', 'Active transport', 'Active Transport'] }
+                { answers: ['partially permeable', 'semi-permeable', 'selectively permeable'] }
             ]
         }
     ],
     journal: [
         'Diffusion: net movement of particles from HIGH to LOW concentration (no energy needed).',
         'Osmosis: movement of WATER from dilute to concentrated solution through a partially permeable membrane.',
-        'Active transport: movement from LOW to HIGH concentration (requires energy from respiration).',
         'A turgid plant cell is firm because its vacuole is full of water.',
         'Plasmolysis occurs when a plant cell loses so much water that the membrane pulls from the cell wall.',
         'Partially permeable membranes allow only certain molecules (like water) to pass through.'

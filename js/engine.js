@@ -273,9 +273,15 @@ const Game = (() => {
         }
 
         updatePlayerInfo();
+        renderStoryScene();
         const scene = storyScenes[state.currentStoryIndex];
         Story.display(scene.speaker, scene.text);
         switchScreen('story-screen');
+    }
+
+    function renderStoryScene() {
+        const el = document.getElementById('story-scene');
+        if (el) el.innerHTML = (typeof Scenes !== 'undefined') ? Scenes.get(state.currentChapter) : '';
     }
 
     function advanceStory() {
@@ -312,12 +318,21 @@ const Game = (() => {
         document.getElementById('btn-check-answer').classList.remove('hidden');
         document.getElementById('btn-puzzle-next').classList.add('hidden');
         document.getElementById('btn-hint').disabled = false;
+        state.retryHintIndex = 0;
 
         const hintBtn = document.getElementById('btn-hint');
         hintBtn.textContent = `Hint (-5 DP)`;
 
         Puzzles.render(puzzle);
         switchScreen('puzzle-screen');
+    }
+
+    // Escalating free hint shown when the player answers incorrectly (does not cost XP)
+    function nextRetryHint(puzzle) {
+        if (!puzzle.hints || puzzle.hints.length === 0) return null;
+        const idx = Math.min(state.retryHintIndex || 0, puzzle.hints.length - 1);
+        state.retryHintIndex = (state.retryHintIndex || 0) + 1;
+        return puzzle.hints[idx];
     }
 
     function checkAnswer() {
@@ -334,15 +349,27 @@ const Game = (() => {
             state.chapterXP[state.currentChapter] = (state.chapterXP[state.currentChapter] || 0) + xpEarned;
             feedback.classList.add('correct');
             feedback.innerHTML = `<strong>Correct!</strong> +${xpEarned} Discovery Points<br>${puzzle.explanation || ''}`;
+
+            // Only when correct: reveal, lock the puzzle, and unlock the way onward
+            document.getElementById('btn-check-answer').classList.add('hidden');
+            document.getElementById('btn-puzzle-next').classList.remove('hidden');
+            document.getElementById('btn-hint').disabled = true;
+            Puzzles.reveal(puzzle, result);
         } else {
+            // Wrong: do NOT reveal the answer or allow continuing — nudge with a hint and let them retry
             feedback.classList.add('incorrect');
-            feedback.innerHTML = `<strong>Not quite.</strong><br>${result.message || puzzle.explanation || 'Review your answer and try the next puzzle.'}`;
+            if (result.message) {
+                feedback.innerHTML = `<strong>Not yet —</strong> ${result.message}`;
+            } else {
+                const hint = nextRetryHint(puzzle);
+                feedback.innerHTML = `<strong>Not quite — try again.</strong>` +
+                    (hint ? `<br><span class="feedback-hint">&#10022; Hint: ${hint}</span>` : '');
+            }
+            // Keep the player on the puzzle: Check stays, Continue stays hidden
+            document.getElementById('btn-check-answer').classList.remove('hidden');
+            document.getElementById('btn-puzzle-next').classList.add('hidden');
         }
 
-        document.getElementById('btn-check-answer').classList.add('hidden');
-        document.getElementById('btn-puzzle-next').classList.remove('hidden');
-        document.getElementById('btn-hint').disabled = true;
-        Puzzles.reveal(puzzle, result);
         save();
     }
 
@@ -353,6 +380,7 @@ const Game = (() => {
         if (state.currentPuzzleIndex < chapter.puzzles.length) {
             const nextPuzzle = chapter.puzzles[state.currentPuzzleIndex];
             if (nextPuzzle.storyBefore) {
+                renderStoryScene();
                 Story.display(nextPuzzle.storyBefore.speaker, nextPuzzle.storyBefore.text);
                 switchScreen('story-screen');
                 state.inStory = true;
