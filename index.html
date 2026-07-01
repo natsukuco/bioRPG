@@ -39,17 +39,51 @@
             <div class="loading-content">
                 <div class="loading-artifact">
                     <svg viewBox="0 0 200 200" class="artifact-svg" aria-hidden="true">
-                        <circle cx="100" cy="100" r="92" fill="none" stroke="#c8a24a" stroke-width="1" opacity="0.5"/>
-                        <circle cx="100" cy="100" r="78" fill="none" stroke="#c8a24a" stroke-width="0.6" stroke-dasharray="2,4" opacity="0.6"/>
-                        <g stroke="#c8a24a" stroke-width="1.2" fill="none" opacity="0.85">
-                            <circle cx="100" cy="100" r="34"/>
-                            <circle cx="100" cy="100" r="10" fill="#c8a24a" opacity="0.4"/>
-                            <path d="M100 8 L100 28 M100 172 L100 192 M8 100 L28 100 M172 100 L192 100"/>
-                            <path d="M35 35 L49 49 M165 35 L151 49 M35 165 L49 151 M165 165 L151 151"/>
-                            <ellipse cx="60" cy="70" rx="10" ry="5" transform="rotate(-25 60 70)"/>
-                            <ellipse cx="142" cy="128" rx="10" ry="5" transform="rotate(-25 142 128)"/>
-                            <ellipse cx="130" cy="62" rx="9" ry="4.5" transform="rotate(20 130 62)"/>
+                        <!-- Rotating compass ring -->
+                        <g fill="none" stroke="#c8a24a">
+                            <circle cx="100" cy="100" r="94" stroke-width="1" opacity="0.5"/>
+                            <circle cx="100" cy="100" r="86" stroke-width="0.6" stroke-dasharray="2,4" opacity="0.6"/>
+                            <g stroke-width="1.4">
+                                <path d="M100 6 L100 16 M100 184 L100 194 M6 100 L16 100 M184 100 L194 100"/>
+                            </g>
+                            <g stroke-width="0.8" opacity="0.8">
+                                <path d="M32 32 L39 39 M168 32 L161 39 M32 168 L39 161 M168 168 L161 161"/>
+                            </g>
+                            <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="52s" repeatCount="indefinite"/>
                         </g>
+
+                        <!-- Sea (clipped inside the ring) -->
+                        <clipPath id="seaClip"><circle cx="100" cy="100" r="82"/></clipPath>
+                        <g clip-path="url(#seaClip)">
+                            <path d="M-60 150 q 20 -8 40 0 t 40 0 t 40 0 t 40 0 t 40 0 t 40 0 t 40 0" fill="none" stroke="#7fa8b0" stroke-width="2" opacity="0.6">
+                                <animateTransform attributeName="transform" type="translate" from="0 0" to="80 0" dur="5s" repeatCount="indefinite"/>
+                            </path>
+                            <path d="M-60 163 q 20 -8 40 0 t 40 0 t 40 0 t 40 0 t 40 0 t 40 0 t 40 0" fill="none" stroke="#7fa8b0" stroke-width="2" opacity="0.4">
+                                <animateTransform attributeName="transform" type="translate" from="-80 0" to="0 0" dur="6.5s" repeatCount="indefinite"/>
+                            </path>
+                        </g>
+
+                        <!-- HMS Beagle, rocking on the swell -->
+                        <g fill="none" stroke="#e3c266" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M62 128 L138 128 L128 146 Q100 154 72 146 Z" fill="rgba(200,162,74,0.25)"/>
+                            <line x1="66" y1="134" x2="134" y2="134" stroke-width="1"/>
+                            <line x1="84" y1="128" x2="84" y2="72"/>
+                            <line x1="100" y1="128" x2="100" y2="56"/>
+                            <line x1="116" y1="128" x2="116" y2="76"/>
+                            <path d="M84 76 Q100 82 84 106 Z" fill="rgba(244,236,210,0.88)" stroke="#cbb88c">
+                                <animate attributeName="d" values="M84 76 Q100 82 84 106 Z; M84 76 Q108 82 84 106 Z; M84 76 Q100 82 84 106 Z" dur="3.2s" repeatCount="indefinite"/>
+                            </path>
+                            <path d="M100 60 Q120 68 100 102 Z" fill="rgba(244,236,210,0.92)" stroke="#cbb88c">
+                                <animate attributeName="d" values="M100 60 Q120 68 100 102 Z; M100 60 Q128 68 100 102 Z; M100 60 Q120 68 100 102 Z" dur="3.6s" repeatCount="indefinite"/>
+                            </path>
+                            <path d="M116 80 Q132 86 116 106 Z" fill="rgba(244,236,210,0.88)" stroke="#cbb88c">
+                                <animate attributeName="d" values="M116 80 Q132 86 116 106 Z; M116 80 Q139 86 116 106 Z; M116 80 Q132 86 116 106 Z" dur="3s" repeatCount="indefinite"/>
+                            </path>
+                            <path d="M100 56 L113 60 L100 64 Z" fill="#9c3030" stroke="none"/>
+                            <animateTransform attributeName="transform" type="rotate" values="-4 100 140; 4 100 140; -4 100 140" dur="4.6s" repeatCount="indefinite"/>
+                        </g>
+
+                        <text x="100" y="182" text-anchor="middle" font-size="9" fill="#8c733a" style="letter-spacing:2px" font-family="Cinzel, serif">HMS BEAGLE</text>
                     </svg>
                 </div>
                 <div id="loading-chapter" class="loading-chapter"></div>
@@ -103,6 +137,7 @@
                 <button id="btn-journal-story" class="btn-icon" title="Field Journal">&#128214;</button>
             </div>
             <div id="story-content" class="story-panel">
+                <div id="story-scene" class="story-scene"></div>
                 <div id="story-speaker" class="speaker-name"></div>
                 <div id="story-text" class="story-text"></div>
             </div>
@@ -161,6 +196,7 @@
         </div>
     </div>
 
+    <script src="js/scenes.js"></script>
     <script src="js/engine.js"></script>
     <script src="js/story.js"></script>
     <script src="js/puzzles.js"></script>

@@ -121,13 +121,17 @@ const Puzzles = (() => {
     }
 
     function handleMatchClick(el, side) {
-        if (el.classList.contains('matched')) return;
+        // Clicking a matched item undoes its pairing so the player can retry
+        if (el.classList.contains('matched')) {
+            unmatchItem(el, side);
+            return;
+        }
 
         if (side === 'left') {
             document.querySelectorAll('.match-item[data-side="left"]').forEach(e => e.classList.remove('selected'));
             el.classList.add('selected');
             puzzleState.selectedLeft = el.dataset.index;
-        } else if (puzzleState.selectedLeft !== null) {
+        } else if (puzzleState.selectedLeft != null) {
             puzzleState.matches[puzzleState.selectedLeft] = el.dataset.originalIndex;
 
             const leftEl = document.querySelector(`.match-item[data-side="left"][data-index="${puzzleState.selectedLeft}"]`);
@@ -137,6 +141,25 @@ const Puzzles = (() => {
 
             puzzleState.selectedLeft = null;
         }
+    }
+
+    function unmatchItem(el, side) {
+        let leftIndex;
+        if (side === 'left') {
+            leftIndex = el.dataset.index;
+        } else {
+            const orig = el.dataset.originalIndex;
+            leftIndex = Object.keys(puzzleState.matches).find(l => puzzleState.matches[l] === orig);
+        }
+        if (leftIndex == null) return;
+
+        const rightOrig = puzzleState.matches[leftIndex];
+        delete puzzleState.matches[leftIndex];
+
+        const leftEl = document.querySelector(`.match-item[data-side="left"][data-index="${leftIndex}"]`);
+        const rightEl = document.querySelector(`.match-item[data-side="right"][data-original-index="${rightOrig}"]`);
+        [leftEl, rightEl].forEach(e => { if (e) e.classList.remove('matched', 'wrong', 'selected'); });
+        puzzleState.selectedLeft = null;
     }
 
     function checkMatching(puzzle) {
@@ -172,7 +195,7 @@ const Puzzles = (() => {
         puzzleState.items = shuffled;
 
         const container = document.createElement('div');
-        container.className = 'sequence-container';
+        container.className = 'sequence-container' + (puzzle.flow ? ' flow' : '');
 
         shuffled.forEach((item, i) => {
             const el = document.createElement('div');
@@ -291,7 +314,14 @@ const Puzzles = (() => {
             slot.dataset.index = i;
             slot.innerHTML = `<span class="slot-num">${i + 1}</span><span class="slot-drop">Drop a label here</span>`;
 
-            slot.addEventListener('click', () => placeInSlot(i));
+            slot.addEventListener('click', () => {
+                if (puzzleState.selectedLabel) {
+                    placeInSlot(i);
+                } else if (puzzleState.placements[i]) {
+                    // Nothing selected and slot is filled — pick the label back up to change it
+                    clearSlot(i);
+                }
+            });
             slot.addEventListener('dragover', (e) => { e.preventDefault(); slot.classList.add('drag-over'); });
             slot.addEventListener('dragleave', () => slot.classList.remove('drag-over'));
             slot.addEventListener('drop', (e) => {
@@ -315,7 +345,6 @@ const Puzzles = (() => {
             chip.draggable = true;
             chip.addEventListener('click', () => selectLabel(chip, label));
             chip.addEventListener('dragstart', (e) => {
-                if (chip.classList.contains('placed')) { e.preventDefault(); return; }
                 selectLabel(chip, label);
                 e.dataTransfer.setData('text/plain', label);
                 e.dataTransfer.effectAllowed = 'move';
@@ -326,10 +355,16 @@ const Puzzles = (() => {
     }
 
     function selectLabel(chip, label) {
-        if (chip.classList.contains('placed')) return;
+        // Any chip may be re-selected (even one already placed) so answers can be changed
         document.querySelectorAll('.label-chip').forEach(c => c.classList.remove('selected'));
         chip.classList.add('selected');
         puzzleState.selectedLabel = label;
+    }
+
+    function clearSlot(slotIndex) {
+        delete puzzleState.placements[slotIndex];
+        updateSlotDisplay(slotIndex, null);
+        refreshChipStates();
     }
 
     function placeInSlot(slotIndex) {
